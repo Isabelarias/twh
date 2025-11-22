@@ -1,12 +1,8 @@
 import streamlit as st
 
-# =========================================================
-#                TU FLOW ORIGINAL (SIN CAMBIOS)
-# =========================================================
-
 flow = {
     "inicio": {
-        "pregunta": "¿Quieres mejorar tu salud?",
+        "pregunta": La prescripción necesita autorización",
         "si": "actividad_fisica",
         "no": "FIN1"
     },
@@ -38,11 +34,9 @@ finales = {
     "FIN5": "Caminar 30 minutos al día es una buena alternativa 🚶‍♀️"
 }
 
-# =========================================================
-#                    LÓGICA STREAMLIT
-# =========================================================
+######## Para streamlit
 
-st.title("💬 Árbol de Decisiones Interactivo")
+st.title("Life Cycle")
 
 # Inicializar estado
 if "nodo" not in st.session_state:
