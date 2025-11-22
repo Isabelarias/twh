@@ -1,6 +1,9 @@
 import streamlit as st
 
-# ----------- DEFINICIÓN DEL FLUJO ----------------
+# =========================================================
+#                TU FLOW ORIGINAL (SIN CAMBIOS)
+# =========================================================
+
 flow = {
     "inicio": {
         "pregunta": "¿Quieres mejorar tu salud?",
@@ -35,60 +38,49 @@ finales = {
     "FIN5": "Caminar 30 minutos al día es una buena alternativa 🚶‍♀️"
 }
 
-# ----------- ESTADO ----------------
+# =========================================================
+#                    LÓGICA STREAMLIT
+# =========================================================
+
+st.title("💬 Árbol de Decisiones Interactivo")
+
+# Inicializar estado
 if "nodo" not in st.session_state:
-    st.session_state.nodo = "inicio"
+    st.session_state["nodo"] = "inicio"
+    st.session_state["historial"] = []
 
-nodo = st.session_state.nodo
+nodo = st.session_state["nodo"]
 
-# ----------- DIAGRAMA MERMAID --------------
-def generar_mermaid(nodo_activo):
-    mermaid = "flowchart TD;\n"
-
-    for key, val in flow.items():
-        mermaid += f"    {key}['{key}'];\n"
-        mermaid += f"    {key} -->|Sí| {val['si']};\n"
-        mermaid += f"    {key} -->|No| {val['no']};\n"
-
-    for f in finales:
-        mermaid += f"    {f}(['{f}']);\n"
-
-    mermaid += f"\nclass {nodo_activo} activeNode;"
-
-    style = """
-    <style>
-    .activeNode rect {
-        fill: #ffdd57 !important;
-        stroke: #d4a017 !important;
-        stroke-width: 3px;
-    }
-    </style>
-    """
-
-    return style + f"```mermaid\n{mermaid}\n```"
-
-
-st.markdown("## 🌳 Árbol de Decisiones Interactivo")
-
-# Mostrar diagrama
-st.markdown(generar_mermaid(nodo), unsafe_allow_html=True)
-
-# Si es final → mostrar resultado
+# Si estamos en un nodo final
 if nodo in finales:
-    st.success(f"**Resultado:** {finales[nodo]}")
+    st.success(finales[nodo])
+
     if st.button("🔄 Reiniciar"):
-        st.session_state.nodo = "inicio"
-    st.stop()
+        st.session_state["nodo"] = "inicio"
+        st.session_state["historial"] = []
+        st.rerun()
 
-# Mostrar pregunta y botones
-st.subheader(flow[nodo]["pregunta"])
+else:
+    # Mostrar pregunta
+    pregunta = flow[nodo]["pregunta"]
+    st.markdown(f"### {pregunta}")
 
-col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2)
 
-if col1.button("Sí"):
-    st.session_state.nodo = flow[nodo]["si"]
+    with col1:
+        if st.button("Sí"):
+            st.session_state["historial"].append(nodo)
+            st.session_state["nodo"] = flow[nodo]["si"]
+            st.rerun()
 
-if col2.button("No"):
-    st.session_state.nodo = flow[nodo]["no"]
+    with col2:
+        if st.button("No"):
+            st.session_state["historial"].append(nodo)
+            st.session_state["nodo"] = flow[nodo]["no"]
+            st.rerun()
 
-st.rerun()
+    # Botón para retroceder
+    if st.session_state["historial"]:
+        if st.button("⬅️ Regresar"):
+            st.session_state["nodo"] = st.session_state["historial"].pop()
+            st.rerun()
