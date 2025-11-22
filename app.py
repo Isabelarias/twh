@@ -2,7 +2,7 @@ import streamlit as st
 
 flow = {
     "inicio": {
-        "pregunta": La prescripción necesita autorización",
+        "pregunta": "La prescripción necesita autorización",
         "si": "actividad_fisica",
         "no": "FIN1"
     },
