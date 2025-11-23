@@ -119,3 +119,10 @@ else:
 
         st.markdown("### 💡 Dato curioso")
         st.warning(flow[nodo]["extra2"])
+
+
+    # Botón para retroceder
+    if st.session_state["historial"]:
+        if st.button("⬅️ Regresar"):
+            st.session_state["nodo"] = st.session_state["historial"].pop()
+            st.rerun()
