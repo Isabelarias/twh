@@ -128,7 +128,7 @@ else:
 
         # Botón de regresar
         if nodo != "inicio":
-            if st.button("↩️ Regresar"):
+            if st.button("Regresar"):
                 volver()
 
     # info lateral
