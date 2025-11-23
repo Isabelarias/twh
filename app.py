@@ -139,7 +139,7 @@ else:
         st.markdown(
         """
         <div style="display:flex; align-items:center; gap:8px;">
-        <img src="https://img.icons8.com/ios-filled/30/light.png" width="24" height="24">
+        <img src="https://iconos8.es/icon/42206/light-on" width="28" height="28">
         <span style="font-size:1.25rem; font-weight:bold;">Dato curioso</span>
         </div>
         """,
