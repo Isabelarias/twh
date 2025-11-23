@@ -152,6 +152,3 @@ else:
             """,
             unsafe_allow_html=True)
         st.info(flow[nodo].get("curioso", "fhjkdsfjdskfdskgisdgkgdfkgjkdfgjdkfgfh"))
-
-        st.markdown("### 🧠 Tip profesional")
-        st.info("Ejemplo de tip profesional relacionado con esta decisión.")
