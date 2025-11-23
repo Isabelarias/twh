@@ -136,7 +136,7 @@ else:
         st.markdown(
             """
             <div style="display:flex; align-items:center; gap:8px;">
-            <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="35" height="35">
+            <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="45" height="45">
             <span style="font-size:1.25rem; font-weight:bold;">Dato curioso</span>
             </div>
             """,
@@ -146,7 +146,7 @@ else:
         st.markdown(
             """
             <div style="display:flex; align-items:center; gap:8px;">
-            <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="35" height="35">
+            <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="45" height="45">
             <span style="font-size:1.25rem; font-weight:bold;">Dato curioso</span>
             </div>
             """,
