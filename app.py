@@ -137,4 +137,10 @@ else:
         st.info(flow[nodo]["info"])
 
         st.markdown("### 💡 Dato curioso")
-        st.warning(flow[nodo]["extra2"])
+        st.warning(flow[nodo].get("curioso", "Aquí puedes poner cualquier dato curioso."))
+
+        st.markdown("### 🧠 Tip profesional")
+        st.info("Ejemplo de tip profesional relacionado con esta decisión.")
+
+        st.markdown("### 🛠️ Procedimiento recomendado")
+        st.success("Aquí puedes mostrar pasos recomendados o un mini checklist.")
