@@ -1,80 +1,121 @@
 import streamlit as st
 
+st.set_page_config(page_title="Life Cycle", layout="wide")
+
+st.title("Life Cycle")
+
 flow = {
     "inicio": {
-        "pregunta": "La prescripción necesita autorización",
-        "si": "actividad_fisica",
-        "no": "FIN1"
+        "pregunta": "¿La prescripción necesita autorización?",
+        "si": "autorizacion_si",
+        "no": "autorizacion_no",
+        "info": "Una prescripción necesita autorización cuando supera ciertos costos o es considerada especial por la aseguradora.",
+        "extra2": "Curiosidad: Algunas aseguradoras cambian los topes de autorización cada año."
     },
-
-    "actividad_fisica": {
-        "pregunta": "¿Te gusta hacer ejercicio?",
-        "si": "gimnasio",
-        "no": "bici"
+    "autorizacion_si": {
+        "pregunta": "¿El paciente cumple criterios?",
+        "si": "FIN1",
+        "no": "FIN2",
+        "info": "Los criterios clínicos se basan en guías médicas y políticas de la aseguradora.",
+        "extra2": "Tip avanzado: Los criterios de enfermedades crónicas suelen tener excepciones clínicas."
     },
-
-    "gimnasio": {
-        "pregunta": "¿Prefieres pesas?",
-        "si": "FIN2",
-        "no": "FIN3"
-    },
-
-    "bici": {
-        "pregunta": "¿Te gustaría probar bicicleta?",
-        "si": "FIN4",
-        "no": "FIN5"
+    "autorizacion_no": {
+        "pregunta": "¿Es una prescripción válida?",
+        "si": "FIN3",
+        "no": "FIN4",
+        "info": "Aquí revisamos si el médico diligenció la prescripción correctamente.",
+        "extra2": "Dato curioso: Algunos formatos electrónicos corrigen errores automáticamente."
     }
 }
 
 finales = {
-    "FIN1": "Está bien, también puedes trabajar en tu bienestar emocional 😊",
-    "FIN2": "Haz entrenamiento de fuerza 3 veces por semana 💪",
-    "FIN3": "Prueba subir escaleras o cardio suave",
-    "FIN4": "Empieza con rutas cortas los fines de semana 🚴‍♀️",
-    "FIN5": "Caminar 30 minutos al día es una buena alternativa 🚶‍♀️"
+    "FIN1": {
+        "titulo": "Autorización aprobada",
+        "texto": "El paciente cumple criterios. Procede la autorización.",
+        "color": "success",
+        "extra": "Tip: Siempre verifica si hay una guía más reciente sobre criterios clínicos.",
+        "extra2": "Dato curioso: En algunos países, las autorizaciones se aprueban automáticamente con IA."
+    },
+    "FIN2": {
+        "titulo": "Autorización denegada",
+        "texto": "El paciente no cumple los criterios clínicos.",
+        "color": "error",
+        "extra": "Dato útil: Puedes sugerir al solicitante que presente nueva evidencia clínica.",
+        "extra2": "Curiosidad: La mitad de las negaciones se deben a documentos incompletos."
+    },
+    "FIN3": {
+        "titulo": "No requiere autorización",
+        "texto": "La prescripción es válida y no necesita proceso adicional.",
+        "color": "info",
+        "extra": "Recuerda: Muchas prescripciones de bajo costo NO pasan por autorización.",
+        "extra2": "Tip adicional: Si dudas, revisa la política de medicamentos de bajo impacto."
+    },
+    "FIN4": {
+        "titulo": "Prescripción rechazada",
+        "texto": "La prescripción no es válida. Revisar con el solicitante.",
+        "color": "warning",
+        "extra": "Tip: Sugiere revisar si el diagnóstico coincide con el medicamento solicitado.",
+        "extra2": "Dato curioso: Los errores más comunes son fechas incorrectas o campos vacíos."
+    }
 }
 
-######## Para streamlit
-
-st.title("Life Cycle")
-
-# Inicializar estado
+# ESTADO
 if "nodo" not in st.session_state:
-    st.session_state["nodo"] = "inicio"
-    st.session_state["historial"] = []
+    st.session_state.nodo = "inicio"
 
-nodo = st.session_state["nodo"]
+nodo = st.session_state.nodo
 
-# Si estamos en un nodo final
+# Columnas: izquierda (pregunta) y derecha (tips)
+col_main, col_side = st.columns([2, 1])
+
+# -------------------------
+#        NODO FINAL
+# -------------------------
 if nodo in finales:
-    st.success(finales[nodo])
+    data = finales[nodo]
 
-    if st.button("🔄 Reiniciar"):
-        st.session_state["nodo"] = "inicio"
-        st.session_state["historial"] = []
-        st.rerun()
+    # CONTENIDO PRINCIPAL
+    with col_main:
+        if data["color"] == "success":
+            st.success(f"### {data['titulo']}\n{data['texto']}")
+        elif data["color"] == "error":
+            st.error(f"### {data['titulo']}\n{data['texto']}")
+        elif data["color"] == "warning":
+            st.warning(f"### {data['titulo']}\n{data['texto']}")
+        else:
+            st.info(f"### {data['titulo']}\n{data['texto']}")
 
+    # PANEL DERECHO: 2 CUADROS
+    with col_side:
+        st.markdown("### ℹ️ Información adicional")
+        st.info(data["extra"])
+
+        st.markdown("### 💡 Dato curioso")
+        st.warning(data["extra2"])
+
+# -------------------------
+#     NODO INTERMEDIO
+# -------------------------
 else:
-    # Mostrar pregunta
     pregunta = flow[nodo]["pregunta"]
-    st.markdown(f"### {pregunta}")
 
-    col1, col2 = st.columns(2)
+    with col_main:
+        st.markdown(f"## {pregunta}")
 
-    with col1:
-        if st.button("Sí"):
-            st.session_state["historial"].append(nodo)
-            st.session_state["nodo"] = flow[nodo]["si"]
-            st.rerun()
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("Sí"):
+                st.session_state.nodo = flow[nodo]["si"]
+                st.rerun()
+        with col2:
+            if st.button("No"):
+                st.session_state.nodo = flow[nodo]["no"]
+                st.rerun()
 
-    with col2:
-        if st.button("No"):
-            st.session_state["historial"].append(nodo)
-            st.session_state["nodo"] = flow[nodo]["no"]
-            st.rerun()
+    # PANEL DERECHO: 2 CUADROS
+    with col_side:
+        st.markdown("### 📌 Info útil")
+        st.info(flow[nodo]["info"])
 
-    # Botón para retroceder
-    if st.session_state["historial"]:
-        if st.button("⬅️ Regresar"):
-            st.session_state["nodo"] = st.session_state["historial"].pop()
-            st.rerun()
+        st.markdown("### 💡 Dato curioso")
+        st.warning(flow[nodo]["extra2"])
