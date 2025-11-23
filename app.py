@@ -144,7 +144,7 @@ else:
         </div>
         """,
         unsafe_allow_html=True)
-        st.warning(flow[nodo].get("curioso", "fhjkdsfjdskfdskgisdgkgdfkgjkdfgjdkfgfh"))
+        st.info(flow[nodo].get("curioso", "fhjkdsfjdskfdskgisdgkgdfkgjkdfgjdkfgfh"))
 
         st.markdown("### 🧠 Tip profesional")
         st.info("Ejemplo de tip profesional relacionado con esta decisión.")
