@@ -135,3 +135,6 @@ else:
     with col_side:
         st.markdown("### 📌 Info útil")
         st.info(flow[nodo]["info"])
+
+        st.markdown("### 💡 Dato curioso")
+        st.warning(flow[nodo]["extra2"])
