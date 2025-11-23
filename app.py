@@ -136,11 +136,15 @@ else:
         st.markdown("### 📌 Info útil")
         st.info(flow[nodo]["info"])
 
-        st.markdown("### 💡 Dato curioso")
+        st.markdown(
+        """
+        <div style="display:flex; align-items:center; gap:8px;">
+        <img src="https://img.icons8.com/ios-filled/30/light.png" width="24" height="24">
+        <span style="font-size:1.25rem; font-weight:bold;">Dato curioso</span>
+        </div>
+        """,
+        unsafe_allow_html=True)
         st.warning(flow[nodo].get("curioso", "Aquí puedes poner cualquier dato curioso."))
 
         st.markdown("### 🧠 Tip profesional")
         st.info("Ejemplo de tip profesional relacionado con esta decisión.")
-
-        st.markdown("### 🛠️ Procedimiento recomendado")
-        st.success("Aquí puedes mostrar pasos recomendados o un mini checklist.")
