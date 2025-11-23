@@ -95,7 +95,7 @@ if nodo in finales:
 
         # Botón de regresar
         if nodo != "inicio":
-            if st.button("↩️ Regresar"):
+            if st.button("Regresar"):
                 volver()
 
     # Cuadro extra
