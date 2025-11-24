@@ -177,11 +177,11 @@ else:
     # IA (DERECHA)
     # -------------------------
     with col_side:
-    st.markdown("### 🤖 Asistente Inteligente")
+        st.markdown("### 🤖 Asistente Inteligente")
 
-    st.markdown(
-        """
-        <div style="padding:15px; border-radius:10px; background-color:#f7f7f7;
+        st.markdown(
+            """
+            <div style="padding:15px; border-radius:10px; background-color:#f7f7f7;
                     border:1px solid #ddd; text-align:center;">
             <p style="font-size:1.1rem; font-weight:600; margin-bottom:10px;">
                 Accede al asistente con la información completa
@@ -192,7 +192,7 @@ else:
                       border-radius:8px; text-decoration:none; font-weight:bold;">
                Abrir Asistente NotebookLM
             </a>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
