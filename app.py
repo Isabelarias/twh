@@ -202,7 +202,7 @@ else:
         st.markdown(
             """
             <div style="display:flex; align-items:center; gap:10px;">
-                <img src="https://img.icons8.com/?size=100&id=56740&format=png&color=000000" width="40">
+                <img src="https://img.icons8.com/?size=100&id=115368&format=png&color=000000" width="40">
                 <span style="font-size:20px; font-weight:bold;">Asistente Inteligente</span>
             </div>
             """,
