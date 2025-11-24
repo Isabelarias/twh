@@ -30,7 +30,7 @@ finales = {
         "titulo": "Autorización aprobada",
         "texto": "El paciente cumple criterios. Procede la autorización.",
         "color": "success",
-        "extra": "Tip: Siempre verifica si hay una guía más reciente sobre criterios clínicos."
+        "extra": "dfjlgklsñdoksñldsñkefoglj"
     },
     "FIN2": {
         "titulo": "Autorización denegada",
@@ -42,13 +42,13 @@ finales = {
         "titulo": "No requiere autorización",
         "texto": "La prescripción es válida y no necesita proceso adicional.",
         "color": "info",
-        "extra": "Recuerda: Muchas prescripciones de bajo costo NO pasan por autorización."
+        "extra": "jkdsghrdfkjgnjkfdgn"
     },
     "FIN4": {
         "titulo": "Prescripción rechazada",
         "texto": "La prescripción no es válida. Revisar con el solicitante.",
         "color": "warning",
-        "extra": "Tip: Sugiere revisar si el diagnóstico coincide con el medicamento solicitado."
+        "extra": "alkrjkfrjkdgnvjr"
     }
 }
 
@@ -96,11 +96,11 @@ if nodo in finales:
 
     # -------- COLUMNA DERECHA (INFO + IA) --------
     with col_side:
-        st.markdown("### ℹ️ Información adicional")
+        st.markdown("###Información adicional")
         st.info(data["extra"])
 
         st.markdown("---")
-        st.markdown("### 🤖 Asistente Inteligente")
+        st.markdown("###Asistente Inteligente")
 
         notebook_url = "https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3"
 
@@ -163,7 +163,7 @@ else:
         st.info(flow[nodo]["info"])
 
         st.markdown("---")
-        st.markdown("### 🤖 Asistente Inteligente")
+        st.markdown("###Asistente Inteligente")
 
         notebook_url = "https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3"
 
