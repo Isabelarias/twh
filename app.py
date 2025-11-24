@@ -23,21 +23,21 @@ if "diagrama" not in st.session_state:
     st.session_state.diagrama = "A"  
 
 with colA:
-    if st.button("Acknowledgments"):
+    if st.button("Ack"):
         st.session_state.diagrama = "A"
         st.session_state.nodo = "inicio"
         st.session_state.historial = []
         st.rerun()
 
 with colB:
-    if st.button("Awaiting Evidence"):
+    if st.button("AE"):
         st.session_state.diagrama = "B"
         st.session_state.nodo = "inicio"
         st.session_state.historial = []
         st.rerun()
 
 with colC:
-    if st.button("Awaiting Next Steps"):
+    if st.button("ANS"):
         st.session_state.diagrama = "C"
         st.session_state.nodo = "inicio"
         st.session_state.historial = []
@@ -72,7 +72,7 @@ with colG:
         st.rerun()
 
 with colH:
-    if st.button("Insurance"):
+    if st.button("Insurances"):
         st.session_state.diagrama = "H"
         st.session_state.nodo = "inicio"
         st.session_state.historial = []
