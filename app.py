@@ -3,7 +3,7 @@ import streamlit as st
 st.set_page_config(page_title="Life Cycle", layout="wide")
 
 # ---------------------------------------------------
-# LOGO EMPRESA (arriba del todo)
+# LOGO EMPRESA
 # ---------------------------------------------------
 st.markdown(
     """
@@ -15,57 +15,135 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-flow = {
-    "inicio": {
-        "pregunta": "¿La prescripción necesita autorización?",
-        "si": "autorizacion_si",
-        "no": "autorizacion_no",
-        "info": "kfjgdfigkjgdfjg"
-    },
-    "autorizacion_si": {
-        "pregunta": "¿El paciente cumple criterios?",
-        "si": "FIN1",
-        "no": "FIN2",
-        "info": "kdjglgjkdfgkfdhjgf"
-    },
-    "autorizacion_no": {
-        "pregunta": "¿Es una prescripción válida?",
-        "si": "FIN3",
-        "no": "FIN4",
-        "info": "dfjkgdfkgdfgndfkgkdjg"
+# ---------------------------------------------------
+# BOTONES PARA SELECCIONAR DIAGRAMA
+# ---------------------------------------------------
+
+st.markdown("### Selecciona un diagrama de decisiones:")
+
+colA, colB, colC = st.columns(3)
+
+if "diagrama" not in st.session_state:
+    st.session_state.diagrama = "A"  
+
+with colA:
+    if st.button("Diagrama A"):
+        st.session_state.diagrama = "A"
+        st.session_state.nodo = "inicio"
+        st.session_state.historial = []
+        st.rerun()
+
+with colB:
+    if st.button("Diagrama B"):
+        st.session_state.diagrama = "B"
+        st.session_state.nodo = "inicio"
+        st.session_state.historial = []
+        st.rerun()
+
+with colC:
+    if st.button("Diagrama C"):
+        st.session_state.diagrama = "C"
+        st.session_state.nodo = "inicio"
+        st.session_state.historial = []
+        st.rerun()
+
+
+# ---------------------------------------------------
+# DIAGRAMAS (FLOWS)
+# ---------------------------------------------------
+
+if st.session_state.diagrama == "A":
+    flow = {
+        "inicio": {
+            "pregunta": "¿La prescripción necesita autorización?",
+            "si": "autorizacion_si",
+            "no": "autorizacion_no",
+            "info": "En algunos sistemas médicos, más del 40% de las prescripciones pasan por un proceso de autorización previa."
+        },
+        "autorizacion_si": {
+            "pregunta": "¿El paciente cumple criterios?",
+            "si": "FIN1",
+            "no": "FIN2",
+            "info": "Los criterios clínicos pueden incluir edad, diagnóstico, historial y respuesta a tratamientos previos."
+        },
+        "autorizacion_no": {
+            "pregunta": "¿Es una prescripción válida?",
+            "si": "FIN3",
+            "no": "FIN4",
+            "info": "Una prescripción inválida puede ser por error de digitación o datos incompletos."
+        }
     }
-}
+
+elif st.session_state.diagrama == "B":
+    flow = {
+        "inicio": {
+            "pregunta": "¿El caso requiere escalación?",
+            "si": "rev_supervisor",
+            "no": "proceso_normal",
+            "info": "El 70% de los casos se resuelve sin escalación en BPO de salud."
+        },
+        "rev_supervisor": {
+            "pregunta": "¿Supervisor disponible?",
+            "si": "FIN5",
+            "no": "FIN6",
+            "info": "En horarios pico, la disponibilidad baja entre 20%–30%."
+        },
+        "proceso_normal": {
+            "pregunta": "¿Documentación completa?",
+            "si": "FIN7",
+            "no": "FIN8",
+            "info": "La documentación incompleta es causa del 45% de retrasos."
+        }
+    }
+
+elif st.session_state.diagrama == "C":
+    flow = {
+        "inicio": {
+            "pregunta": "¿Existe riesgo para el paciente?",
+            "si": "evaluacion_riesgo",
+            "no": "proceso_continuo",
+            "info": "La evaluación de riesgo es el primer paso para asegurar seguridad clínica."
+        },
+        "evaluacion_riesgo": {
+            "pregunta": "¿Riesgo crítico?",
+            "si": "FIN9",
+            "no": "FIN10",
+            "info": "El riesgo crítico implica intervención inmediata."
+        },
+        "proceso_continuo": {
+            "pregunta": "¿Caso completo?",
+            "si": "FIN11",
+            "no": "FIN12",
+            "info": "Un caso completo mejora la eficiencia del proceso hasta en un 60%."
+        }
+    }
+
+
+# ---------------------------------------------------
+# NODOS FINALES
+# ---------------------------------------------------
 
 finales = {
-    "FIN1": {
-        "titulo": "Autorización aprobada",
-        "texto": "El paciente cumple criterios. Procede la autorización.",
-        "color": "success",
-        "extra": "dfjlgklsñdoksñldsñkefoglj"
-    },
-    "FIN2": {
-        "titulo": "Autorización denegada",
-        "texto": "El paciente no cumple los criterios clínicos.",
-        "color": "error",
-        "extra": "kdsjgfkdgkj"
-    },
-    "FIN3": {
-        "titulo": "No requiere autorización",
-        "texto": "La prescripción es válida y no necesita proceso adicional.",
-        "color": "info",
-        "extra": "jkdsghrdfkjgnjkfdgn"
-    },
-    "FIN4": {
-        "titulo": "Prescripción rechazada",
-        "texto": "La prescripción no es válida. Revisar con el solicitante.",
-        "color": "warning",
-        "extra": "alkrjkfrjkdgnvjr"
-    }
+    "FIN1": {"titulo": "Autorización aprobada", "texto": "El paciente cumple criterios.", "color": "success", "extra": "Puedes proceder sin restricciones."},
+    "FIN2": {"titulo": "Autorización denegada", "texto": "No cumple criterios clínicos.", "color": "error", "extra": "Sugiere alternativas terapéuticas."},
+    "FIN3": {"titulo": "No requiere autorización", "texto": "Prescripción válida.", "color": "info", "extra": "Continúa flujo normal."},
+    "FIN4": {"titulo": "Prescripción rechazada", "texto": "No es válida.", "color": "warning", "extra": "Verifica con el médico solicitante."},
+
+    "FIN5": {"titulo": "Supervisor revisa", "texto": "Caso escalado.", "color": "info", "extra": "Tiempo estimado: 5–10 minutos."},
+    "FIN6": {"titulo": "Supervisor no disponible", "texto": "Intenta más tarde.", "color": "warning", "extra": "Puede haber alta demanda."},
+    "FIN7": {"titulo": "Proceso completado", "texto": "Documentación en orden.", "color": "success", "extra": "Caso finalizado correctamente."},
+    "FIN8": {"titulo": "Falta documentación", "texto": "No se puede continuar.", "color": "error", "extra": "Solicita los documentos faltantes."},
+
+    "FIN9": {"titulo": "Riesgo crítico", "texto": "Acción inmediata requerida.", "color": "error", "extra": "Notifica al equipo clínico urgente."},
+    "FIN10": {"titulo": "Riesgo moderado", "texto": "Continuar con precaución.", "color": "warning", "extra": "Monitorea cambios."},
+    "FIN11": {"titulo": "Caso completo", "texto": "Todo en orden.", "color": "success", "extra": "Listo para registrar."},
+    "FIN12": {"titulo": "Caso incompleto", "texto": "Faltan elementos.", "color": "info", "extra": "Revisa la documentación recibida."},
 }
 
-# -------------------------
+# ---------------------------------------------------
 # ESTADO
-# -------------------------
+# ---------------------------------------------------
+
 if "nodo" not in st.session_state:
     st.session_state.nodo = "inicio"
 
@@ -74,8 +152,8 @@ if "historial" not in st.session_state:
 
 nodo = st.session_state.nodo
 
-# Diseño: 2 columnas (tu main + columna IA)
-col_main, col_side = st.columns([2, 1])
+# Diseño: 2 columnas (main + IA/info)
+col_main, col_side = st.columns([2.2, 1])
 
 # -------------------------
 # FUNCIÓN PARA VOLVER
@@ -85,9 +163,9 @@ def volver():
         st.session_state.nodo = st.session_state.historial.pop()
         st.rerun()
 
-# -------------------------
+# ---------------------------------------------------
 # NODO FINAL
-# -------------------------
+# ---------------------------------------------------
 if nodo in finales:
     data = finales[nodo]
 
@@ -101,40 +179,38 @@ if nodo in finales:
         else:
             st.info(f"### {data['titulo']}\n{data['texto']}")
 
-        if nodo != "inicio":
-            if st.button("Regresar"):
-                volver()
+        if st.button("Regresar"):
+            volver()
 
-    # -------- COLUMNA DERECHA (INFO + IA) --------
+    # -------- COLUMNA DERECHA: INFO + IA --------
     with col_side:
 
-        # ----------------- TÍTULO INFO -----------------
+        # INFO EXTRA
         st.markdown(
             """
             <div style="display:flex; align-items:center; gap:10px;">
-                <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="40">
+                <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="35">
                 <span style="font-size:20px; font-weight:bold;">Información adicional</span>
             </div>
             """,
             unsafe_allow_html=True
         )
-
         st.info(data["extra"])
 
         st.markdown("---")
 
-        # ----------------- TÍTULO IA -----------------
+        # ASISTENTE INTELIGENTE
+        notebook_url = "https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3"
+
         st.markdown(
             """
             <div style="display:flex; align-items:center; gap:10px;">
-                <img src="https://img.icons8.com/?size=100&id=56740&format=png&color=000000" width="40">
+                <img src="https://img.icons8.com/?size=100&id=56740&format=png&color=000000" width="35">
                 <span style="font-size:20px; font-weight:bold;">Asistente Inteligente</span>
             </div>
             """,
             unsafe_allow_html=True
         )
-
-        notebook_url = "https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3"
 
         st.markdown(
             f"""
@@ -154,9 +230,9 @@ if nodo in finales:
             unsafe_allow_html=True
         )
 
-# -------------------------
+# ---------------------------------------------------
 # NODO INTERMEDIO
-# -------------------------
+# ---------------------------------------------------
 else:
     pregunta = flow[nodo]["pregunta"]
 
@@ -169,6 +245,7 @@ else:
                 st.session_state.historial.append(nodo)
                 st.session_state.nodo = flow[nodo]["si"]
                 st.rerun()
+
         with col2:
             if st.button("No"):
                 st.session_state.historial.append(nodo)
@@ -179,14 +256,14 @@ else:
             if st.button("Regresar"):
                 volver()
 
-    # -------- COLUMNA DERECHA (CURIOSO + IA) --------
+    # -------- COLUMNA DERECHA: DATO CURIOSO + IA --------
     with col_side:
 
-        # --------------- DATO CURIOSO ----------------
+        # DATO CURIOSO
         st.markdown(
             """
             <div style="display:flex; align-items:center; gap:10px;">
-                <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="40">
+                <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="35">
                 <span style="font-size:20px; font-weight:bold;">Dato curioso</span>
             </div>
             """,
@@ -197,18 +274,18 @@ else:
 
         st.markdown("---")
 
-        # ----------------- ASISTENTE INTELIGENTE -----------------
+        # ASISTENTE INTELIGENTE
+        notebook_url = "https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3"
+
         st.markdown(
             """
             <div style="display:flex; align-items:center; gap:10px;">
-                <img src="https://img.icons8.com/?size=100&id=115368&format=png&color=000000" width="40">
+                <img src="https://img.icons8.com/?size=100&id=115368&format=png&color=000000" width="35">
                 <span style="font-size:20px; font-weight:bold;">Asistente Inteligente</span>
             </div>
             """,
             unsafe_allow_html=True
         )
-
-        notebook_url = "https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3"
 
         st.markdown(
             f"""
