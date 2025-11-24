@@ -163,7 +163,7 @@ else:
         st.info(flow[nodo]["info"])
 
         st.markdown("---")
-        st.markdown("###Asistente Inteligente")
+        st.markdown("Asistente Inteligente")
 
         notebook_url = "https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3"
 
