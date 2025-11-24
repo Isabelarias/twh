@@ -176,10 +176,23 @@ else:
     # -------------------------
     # IA (DERECHA)
     # -------------------------
-    with col_right:
-        st.markdown("### 🤖 Asistente Inteligente")
-        components.iframe(
-            src="https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3",
-            height=750,
-            scrolling=True
-        )
+    with col_side:
+    st.markdown("### 🤖 Asistente Inteligente")
+
+    st.markdown(
+        """
+        <div style="padding:15px; border-radius:10px; background-color:#f7f7f7;
+                    border:1px solid #ddd; text-align:center;">
+            <p style="font-size:1.1rem; font-weight:600; margin-bottom:10px;">
+                Accede al asistente con la información completa
+            </p>
+            <a href="https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3" 
+               target="_blank" 
+               style="display:inline-block; padding:10px 18px; background-color:#4a90e2; color:white;
+                      border-radius:8px; text-decoration:none; font-weight:bold;">
+               Abrir Asistente NotebookLM
+            </a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
