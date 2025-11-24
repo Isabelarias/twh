@@ -2,9 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Life Cycle", layout="wide")
 
-# ---------------------------------------------------
-# LOGO EMPRESA
-# ---------------------------------------------------
+# Logo empresa ------------------------------------------------------
 st.markdown(
     """
     <div style="display:flex; justify-content:flex-end; align-items:center; width:100%; margin-bottom:-40px; margin-top:-20px;">
@@ -15,13 +13,11 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# ---------------------------------------------------
-# BOTONES PARA SELECCIONAR DIAGRAMA
-# ---------------------------------------------------
+# Botones ------------------------------------------------------
 
 st.markdown("### Selecciona un diagrama de decisiones:")
 
-colA, colB, colC = st.columns(3)
+colA, colB, colC, colD, colE, colF, colG, colH = st.columns(8)
 
 if "diagrama" not in st.session_state:
     st.session_state.diagrama = "A"  
@@ -46,11 +42,44 @@ with colC:
         st.session_state.nodo = "inicio"
         st.session_state.historial = []
         st.rerun()
+        
+with colD:
+    if st.button("Diagrama D"):
+        st.session_state.diagrama = "D"
+        st.session_state.nodo = "inicio"
+        st.session_state.historial = []
+        st.rerun()
+
+with colE:
+    if st.button("Diagrama E"):
+        st.session_state.diagrama = "E"
+        st.session_state.nodo = "inicio"
+        st.session_state.historial = []
+        st.rerun()
+
+with colF:
+    if st.button("Diagrama F"):
+        st.session_state.diagrama = "F"
+        st.session_state.nodo = "inicio"
+        st.session_state.historial = []
+        st.rerun()
+
+with colG:
+    if st.button("Diagrama G"):
+        st.session_state.diagrama = "G"
+        st.session_state.nodo = "inicio"
+        st.session_state.historial = []
+        st.rerun()
+
+with colH:
+    if st.button("Diagrama H"):
+        st.session_state.diagrama = "H"
+        st.session_state.nodo = "inicio"
+        st.session_state.historial = []
+        st.rerun()
 
 
-# ---------------------------------------------------
-# DIAGRAMAS (FLOWS)
-# ---------------------------------------------------
+# Diagramas de decision ------------------------------------------------------
 
 if st.session_state.diagrama == "A":
     flow = {
@@ -115,6 +144,116 @@ elif st.session_state.diagrama == "C":
             "si": "FIN11",
             "no": "FIN12",
             "info": "Un caso completo mejora la eficiencia del proceso hasta en un 60%."
+        }
+    }
+
+elif st.session_state.diagrama == "D":
+    flow = {
+        "inicio": {
+            "pregunta": "¿El caso requiere escalación?",
+            "si": "rev_supervisor",
+            "no": "proceso_normal",
+            "info": "El 70% de los casos se resuelve sin escalación en BPO de salud."
+        },
+        "rev_supervisor": {
+            "pregunta": "¿Supervisor disponible?",
+            "si": "FIN5",
+            "no": "FIN6",
+            "info": "En horarios pico, la disponibilidad baja entre 20%–30%."
+        },
+        "proceso_normal": {
+            "pregunta": "¿Documentación completa?",
+            "si": "FIN7",
+            "no": "FIN8",
+            "info": "La documentación incompleta es causa del 45% de retrasos."
+        }
+    }
+
+elif st.session_state.diagrama == "E":
+    flow = {
+        "inicio": {
+            "pregunta": "¿El caso requiere escalación?",
+            "si": "rev_supervisor",
+            "no": "proceso_normal",
+            "info": "El 70% de los casos se resuelve sin escalación en BPO de salud."
+        },
+        "rev_supervisor": {
+            "pregunta": "¿Supervisor disponible?",
+            "si": "FIN5",
+            "no": "FIN6",
+            "info": "En horarios pico, la disponibilidad baja entre 20%–30%."
+        },
+        "proceso_normal": {
+            "pregunta": "¿Documentación completa?",
+            "si": "FIN7",
+            "no": "FIN8",
+            "info": "La documentación incompleta es causa del 45% de retrasos."
+        }
+    }
+
+elif st.session_state.diagrama == "F":
+    flow = {
+        "inicio": {
+            "pregunta": "¿El caso requiere escalación?",
+            "si": "rev_supervisor",
+            "no": "proceso_normal",
+            "info": "El 70% de los casos se resuelve sin escalación en BPO de salud."
+        },
+        "rev_supervisor": {
+            "pregunta": "¿Supervisor disponible?",
+            "si": "FIN5",
+            "no": "FIN6",
+            "info": "En horarios pico, la disponibilidad baja entre 20%–30%."
+        },
+        "proceso_normal": {
+            "pregunta": "¿Documentación completa?",
+            "si": "FIN7",
+            "no": "FIN8",
+            "info": "La documentación incompleta es causa del 45% de retrasos."
+        }
+    }
+
+elif st.session_state.diagrama == "G":
+    flow = {
+        "inicio": {
+            "pregunta": "¿El caso requiere escalación?",
+            "si": "rev_supervisor",
+            "no": "proceso_normal",
+            "info": "El 70% de los casos se resuelve sin escalación en BPO de salud."
+        },
+        "rev_supervisor": {
+            "pregunta": "¿Supervisor disponible?",
+            "si": "FIN5",
+            "no": "FIN6",
+            "info": "En horarios pico, la disponibilidad baja entre 20%–30%."
+        },
+        "proceso_normal": {
+            "pregunta": "¿Documentación completa?",
+            "si": "FIN7",
+            "no": "FIN8",
+            "info": "La documentación incompleta es causa del 45% de retrasos."
+        }
+    }
+
+elif st.session_state.diagrama == "H":
+    flow = {
+        "inicio": {
+            "pregunta": "¿El caso requiere escalación?",
+            "si": "rev_supervisor",
+            "no": "proceso_normal",
+            "info": "El 70% de los casos se resuelve sin escalación en BPO de salud."
+        },
+        "rev_supervisor": {
+            "pregunta": "¿Supervisor disponible?",
+            "si": "FIN5",
+            "no": "FIN6",
+            "info": "En horarios pico, la disponibilidad baja entre 20%–30%."
+        },
+        "proceso_normal": {
+            "pregunta": "¿Documentación completa?",
+            "si": "FIN7",
+            "no": "FIN8",
+            "info": "La documentación incompleta es causa del 45% de retrasos."
         }
     }
 
