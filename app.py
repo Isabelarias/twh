@@ -23,56 +23,56 @@ if "diagrama" not in st.session_state:
     st.session_state.diagrama = "A"  
 
 with colA:
-    if st.button("Diagrama A"):
+    if st.button("Acknowledgments"):
         st.session_state.diagrama = "A"
         st.session_state.nodo = "inicio"
         st.session_state.historial = []
         st.rerun()
 
 with colB:
-    if st.button("Diagrama B"):
+    if st.button("Awaiting Evidence"):
         st.session_state.diagrama = "B"
         st.session_state.nodo = "inicio"
         st.session_state.historial = []
         st.rerun()
 
 with colC:
-    if st.button("Diagrama C"):
+    if st.button("Awaiting Next Steps"):
         st.session_state.diagrama = "C"
         st.session_state.nodo = "inicio"
         st.session_state.historial = []
         st.rerun()
         
 with colD:
-    if st.button("Diagrama D"):
+    if st.button("Status"):
         st.session_state.diagrama = "D"
         st.session_state.nodo = "inicio"
         st.session_state.historial = []
         st.rerun()
 
 with colE:
-    if st.button("Diagrama E"):
+    if st.button("Pharmacy"):
         st.session_state.diagrama = "E"
         st.session_state.nodo = "inicio"
         st.session_state.historial = []
         st.rerun()
 
 with colF:
-    if st.button("Diagrama F"):
+    if st.button("Post-Transfers"):
         st.session_state.diagrama = "F"
         st.session_state.nodo = "inicio"
         st.session_state.historial = []
         st.rerun()
 
 with colG:
-    if st.button("Diagrama G"):
+    if st.button("Enrollments"):
         st.session_state.diagrama = "G"
         st.session_state.nodo = "inicio"
         st.session_state.historial = []
         st.rerun()
 
 with colH:
-    if st.button("Diagrama H"):
+    if st.button("Insurance"):
         st.session_state.diagrama = "H"
         st.session_state.nodo = "inicio"
         st.session_state.historial = []
