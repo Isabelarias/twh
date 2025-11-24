@@ -2,7 +2,19 @@ import streamlit as st
 
 st.set_page_config(page_title="Life Cycle", layout="wide")
 
-st.title("Life Cycle")
+# ---------------------------------------------------
+# LOGO EMPRESA (arriba del todo)
+# ---------------------------------------------------
+st.markdown(
+    """
+    <div style="display:flex; align-items:center; gap:15px;">
+        <img src="https://media.licdn.com/dms/image/sync/v2/D5627AQHFh-gz6oTSAQ/articleshare-shrink_480/B56ZmBlrxmJ4Ao-/0/1758815763863?e=2147483647&v=beta&t=GMDQ2mYSHgk7SWwFTFlkSBF4FhZRD3Bil1rFrB5W9bo" 
+             width="90" style="border-radius:10px;">
+        <h1 style="margin:0;">Life Cycle</h1>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 flow = {
     "inicio": {
@@ -96,11 +108,32 @@ if nodo in finales:
 
     # -------- COLUMNA DERECHA (INFO + IA) --------
     with col_side:
-        st.markdown("###Información adicional")
+
+        # ----------------- TÍTULO INFO -----------------
+        st.markdown(
+            """
+            <div style="display:flex; align-items:center; gap:10px;">
+                <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="40">
+                <span style="font-size:20px; font-weight:bold;">Información adicional</span>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
         st.info(data["extra"])
 
         st.markdown("---")
-        st.markdown("###Asistente Inteligente")
+
+        # ----------------- TÍTULO IA -----------------
+        st.markdown(
+            """
+            <div style="display:flex; align-items:center; gap:10px;">
+                <img src="https://img.icons8.com/?size=100&id=56740&format=png&color=000000" width="40">
+                <span style="font-size:20px; font-weight:bold;">Asistente Inteligente</span>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
         notebook_url = "https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3"
 
@@ -150,20 +183,31 @@ else:
     # -------- COLUMNA DERECHA (CURIOSO + IA) --------
     with col_side:
 
+        # --------------- DATO CURIOSO ----------------
         st.markdown(
             """
-            <div style="display:flex; align-items:center; gap:8px;">
-            <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="45" height="45">
-            <span style="font-size:1.25rem; font-weight:bold;">Dato curioso</span>
+            <div style="display:flex; align-items:center; gap:10px;">
+                <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="40">
+                <span style="font-size:20px; font-weight:bold;">Dato curioso</span>
             </div>
             """,
-            unsafe_allow_html=True,
+            unsafe_allow_html=True
         )
 
         st.info(flow[nodo]["info"])
 
         st.markdown("---")
-        st.markdown("Asistente Inteligente")
+
+        # ----------------- ASISTENTE INTELIGENTE -----------------
+        st.markdown(
+            """
+            <div style="display:flex; align-items:center; gap:10px;">
+                <img src="https://img.icons8.com/?size=100&id=56740&format=png&color=000000" width="40">
+                <span style="font-size:20px; font-weight:bold;">Asistente Inteligente</span>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
         notebook_url = "https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3"
 
