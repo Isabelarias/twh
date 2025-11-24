@@ -1,54 +1,64 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 st.set_page_config(page_title="Life Cycle", layout="wide")
 
 st.title("Life Cycle")
 
+# -------------------------
+# FLUJO DEL DIAGRAMA
+# -------------------------
 flow = {
     "inicio": {
         "pregunta": "¿La prescripción necesita autorización?",
         "si": "autorizacion_si",
         "no": "autorizacion_no",
-        "info": "kfjgdfigkjgdfjg"
+        "info": "Una prescripción puede requerir autorización cuando supera ciertos costos o entra en categorías especiales.",
+        "curioso": "Muchos medicamentos de bajo costo no requieren autorización previa."
     },
     "autorizacion_si": {
         "pregunta": "¿El paciente cumple criterios?",
         "si": "FIN1",
         "no": "FIN2",
-        "info": "kdjglgjkdfgkfdhjgf"
+        "info": "Los criterios clínicos se basan en guías médicas y políticas del asegurador.",
+        "curioso": "Los criterios pueden cambiar cada año según nuevas evidencias."
     },
     "autorizacion_no": {
         "pregunta": "¿Es una prescripción válida?",
         "si": "FIN3",
         "no": "FIN4",
-        "info": "dfjkgdfkgdfgndfkgkdjg"
+        "info": "Se revisa si el médico diligenció la fórmula correctamente.",
+        "curioso": "El 15% de las prescripciones rechazadas es por errores de digitación."
     }
 }
 
+# -------------------------
+# RESULTADOS FINALES
+# -------------------------
 finales = {
     "FIN1": {
         "titulo": "Autorización aprobada",
         "texto": "El paciente cumple criterios. Procede la autorización.",
         "color": "success",
-        "extra": "Tip: Siempre verifica si hay una guía más reciente sobre criterios clínicos."
+        "extra": "Verifica siempre si existe una versión más reciente de los criterios clínicos."
     },
     "FIN2": {
         "titulo": "Autorización denegada",
         "texto": "El paciente no cumple los criterios clínicos.",
         "color": "error",
-        "extra": "kdsjgfkdgkj"
+        "extra": "Sugiere al solicitante presentar nueva evidencia clínica o exámenes recientes."
     },
     "FIN3": {
         "titulo": "No requiere autorización",
         "texto": "La prescripción es válida y no necesita proceso adicional.",
         "color": "info",
-        "extra": "Recuerda: Muchas prescripciones de bajo costo NO pasan por autorización."
+        "extra": "Muchos medicamentos de bajo costo no necesitan autorización previa."
     },
     "FIN4": {
         "titulo": "Prescripción rechazada",
         "texto": "La prescripción no es válida. Revisar con el solicitante.",
         "color": "warning",
-        "extra": "Tip: Sugiere revisar si el diagnóstico coincide con el medicamento solicitado."
+        "extra": "Verifica que el diagnóstico coincida con el medicamento solicitado."
     }
 }
 
@@ -58,32 +68,32 @@ finales = {
 if "nodo" not in st.session_state:
     st.session_state.nodo = "inicio"
 
-# historial para volver atrás
 if "historial" not in st.session_state:
     st.session_state.historial = []
 
 nodo = st.session_state.nodo
 
-# Diseño: 2 columnas
-col_main, col_side = st.columns([2, 1])
-
 # -------------------------
-# FUNCIÓN PARA VOLVER
+# FUNCIÓN DE VOLVER
 # -------------------------
 def volver():
     if st.session_state.historial:
         st.session_state.nodo = st.session_state.historial.pop()
         st.rerun()
 
+# -------------------------
+# LAYOUT DE COLUMNAS
+# -------------------------
+col_left, col_right = st.columns([2.2, 1])
 
-# -------------------------
-# NODO FINAL
-# -------------------------
+# ------------------------------------------------
+#                NODO FINAL
+# ------------------------------------------------
 if nodo in finales:
     data = finales[nodo]
 
-    with col_main:
-        # Mostrar resultado final
+    with col_left:
+        # TARJETA DEL RESULTADO
         if data["color"] == "success":
             st.success(f"### {data['titulo']}\n{data['texto']}")
         elif data["color"] == "error":
@@ -93,23 +103,41 @@ if nodo in finales:
         else:
             st.info(f"### {data['titulo']}\n{data['texto']}")
 
-        # Botón de regresar
+        # Botón regresar
         if nodo != "inicio":
             if st.button("Regresar"):
                 volver()
 
-    # Cuadro extra
-    with col_side:
-        st.markdown("### ℹ️ Información adicional")
+        # Dato curioso debajo (IZQUIERDA)
+        st.markdown(
+            """
+            <div style="display:flex; align-items:center; gap:8px; margin-top:30px;">
+            <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="40">
+            <span style="font-size:1.25rem; font-weight:bold;">Dato curioso</span>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
         st.info(data["extra"])
 
-# -------------------------
-# NODO INTERMEDIO
-# -------------------------
+    # IA NotebookLM (DERECHA)
+    with col_right:
+        st.markdown("### 🤖 Asistente Inteligente")
+        st.write("Consulta información, haz preguntas o recibe ayuda contextual.")
+
+        components.iframe(
+            src="https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3",
+            height=750,
+            scrolling=True
+        )
+
+# ------------------------------------------------
+#            NODO INTERMEDIO
+# ------------------------------------------------
 else:
     pregunta = flow[nodo]["pregunta"]
 
-    with col_main:
+    with col_left:
         st.markdown(f"## {pregunta}")
 
         col1, col2 = st.columns(2)
@@ -126,29 +154,32 @@ else:
                 st.session_state.nodo = flow[nodo]["no"]
                 st.rerun()
 
-        # Botón de regresar
+        # Botón volver
         if nodo != "inicio":
             if st.button("Regresar"):
                 volver()
 
-    # info lateral
-    with col_side:
+        # -------------------------
+        # DATO CURIOSO (IZQUIERDA)
+        # -------------------------
         st.markdown(
             """
-            <div style="display:flex; align-items:center; gap:8px;">
-            <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="45" height="45">
+            <div style="display:flex; align-items:center; gap:8px; margin-top:30px;">
+            <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="40">
             <span style="font-size:1.25rem; font-weight:bold;">Dato curioso</span>
             </div>
             """,
-            unsafe_allow_html=True)
-        st.info(flow[nodo]["info"])
+            unsafe_allow_html=True
+        )
+        st.info(flow[nodo].get("curioso", "Aquí puedes agregar un dato curioso."))
 
-        st.markdown(
-            """
-            <div style="display:flex; align-items:center; gap:8px;">
-            <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="45" height="45">
-            <span style="font-size:1.25rem; font-weight:bold;">Dato curioso</span>
-            </div>
-            """,
-            unsafe_allow_html=True)
-        st.info(flow[nodo].get("curioso", "fhjkdsfjdskfdskgisdgkgdfkgjkdfgjdkfgfh"))
+    # -------------------------
+    # IA (DERECHA)
+    # -------------------------
+    with col_right:
+        st.markdown("### 🤖 Asistente Inteligente")
+        components.iframe(
+            src="https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3",
+            height=750,
+            scrolling=True
+        )
