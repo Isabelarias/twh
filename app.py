@@ -1,64 +1,54 @@
 import streamlit as st
-import streamlit.components.v1 as components
 
 st.set_page_config(page_title="Life Cycle", layout="wide")
 
 st.title("Life Cycle")
 
-# -------------------------
-# FLUJO DEL DIAGRAMA
-# -------------------------
 flow = {
     "inicio": {
         "pregunta": "¿La prescripción necesita autorización?",
         "si": "autorizacion_si",
         "no": "autorizacion_no",
-        "info": "Una prescripción puede requerir autorización cuando supera ciertos costos o entra en categorías especiales.",
-        "curioso": "Muchos medicamentos de bajo costo no requieren autorización previa."
+        "info": "kfjgdfigkjgdfjg"
     },
     "autorizacion_si": {
         "pregunta": "¿El paciente cumple criterios?",
         "si": "FIN1",
         "no": "FIN2",
-        "info": "Los criterios clínicos se basan en guías médicas y políticas del asegurador.",
-        "curioso": "Los criterios pueden cambiar cada año según nuevas evidencias."
+        "info": "kdjglgjkdfgkfdhjgf"
     },
     "autorizacion_no": {
         "pregunta": "¿Es una prescripción válida?",
         "si": "FIN3",
         "no": "FIN4",
-        "info": "Se revisa si el médico diligenció la fórmula correctamente.",
-        "curioso": "El 15% de las prescripciones rechazadas es por errores de digitación."
+        "info": "dfjkgdfkgdfgndfkgkdjg"
     }
 }
 
-# -------------------------
-# RESULTADOS FINALES
-# -------------------------
 finales = {
     "FIN1": {
         "titulo": "Autorización aprobada",
         "texto": "El paciente cumple criterios. Procede la autorización.",
         "color": "success",
-        "extra": "Verifica siempre si existe una versión más reciente de los criterios clínicos."
+        "extra": "Tip: Siempre verifica si hay una guía más reciente sobre criterios clínicos."
     },
     "FIN2": {
         "titulo": "Autorización denegada",
         "texto": "El paciente no cumple los criterios clínicos.",
         "color": "error",
-        "extra": "Sugiere al solicitante presentar nueva evidencia clínica o exámenes recientes."
+        "extra": "kdsjgfkdgkj"
     },
     "FIN3": {
         "titulo": "No requiere autorización",
         "texto": "La prescripción es válida y no necesita proceso adicional.",
         "color": "info",
-        "extra": "Muchos medicamentos de bajo costo no necesitan autorización previa."
+        "extra": "Recuerda: Muchas prescripciones de bajo costo NO pasan por autorización."
     },
     "FIN4": {
         "titulo": "Prescripción rechazada",
         "texto": "La prescripción no es válida. Revisar con el solicitante.",
         "color": "warning",
-        "extra": "Verifica que el diagnóstico coincida con el medicamento solicitado."
+        "extra": "Tip: Sugiere revisar si el diagnóstico coincide con el medicamento solicitado."
     }
 }
 
@@ -73,8 +63,11 @@ if "historial" not in st.session_state:
 
 nodo = st.session_state.nodo
 
+# Diseño: 2 columnas (tu main + columna IA)
+col_main, col_side = st.columns([2, 1])
+
 # -------------------------
-# FUNCIÓN DE VOLVER
+# FUNCIÓN PARA VOLVER
 # -------------------------
 def volver():
     if st.session_state.historial:
@@ -82,18 +75,12 @@ def volver():
         st.rerun()
 
 # -------------------------
-# LAYOUT DE COLUMNAS
+# NODO FINAL
 # -------------------------
-col_left, col_right = st.columns([2.2, 1])
-
-# ------------------------------------------------
-#                NODO FINAL
-# ------------------------------------------------
 if nodo in finales:
     data = finales[nodo]
 
-    with col_left:
-        # TARJETA DEL RESULTADO
+    with col_main:
         if data["color"] == "success":
             st.success(f"### {data['titulo']}\n{data['texto']}")
         elif data["color"] == "error":
@@ -103,96 +90,97 @@ if nodo in finales:
         else:
             st.info(f"### {data['titulo']}\n{data['texto']}")
 
-        # Botón regresar
         if nodo != "inicio":
             if st.button("Regresar"):
                 volver()
 
-        # Dato curioso debajo (IZQUIERDA)
+    # -------- COLUMNA DERECHA (INFO + IA) --------
+    with col_side:
+        st.markdown("### ℹ️ Información adicional")
+        st.info(data["extra"])
+
+        st.markdown("---")
+        st.markdown("### 🤖 Asistente Inteligente")
+
+        notebook_url = "https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3"
+
         st.markdown(
-            """
-            <div style="display:flex; align-items:center; gap:8px; margin-top:30px;">
-            <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="40">
-            <span style="font-size:1.25rem; font-weight:bold;">Dato curioso</span>
-            </div>
+            f"""
+            <a href="{notebook_url}" target="_blank">
+                <button style="
+                    padding:10px 20px;
+                    background-color:#4CAF50;
+                    color:white;
+                    border:none;
+                    border-radius:8px;
+                    font-size:16px;
+                    cursor:pointer;">
+                    Abrir NotebookLM
+                </button>
+            </a>
             """,
             unsafe_allow_html=True
         )
-        st.info(data["extra"])
 
-    # IA NotebookLM (DERECHA)
-    with col_right:
-        st.markdown("### 🤖 Asistente Inteligente")
-        st.write("Consulta información, haz preguntas o recibe ayuda contextual.")
-
-        components.iframe(
-            src="https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3",
-            height=750,
-            scrolling=True
-        )
-
-# ------------------------------------------------
-#            NODO INTERMEDIO
-# ------------------------------------------------
+# -------------------------
+# NODO INTERMEDIO
+# -------------------------
 else:
     pregunta = flow[nodo]["pregunta"]
 
-    with col_left:
+    with col_main:
         st.markdown(f"## {pregunta}")
 
         col1, col2 = st.columns(2)
-
         with col1:
             if st.button("Sí"):
                 st.session_state.historial.append(nodo)
                 st.session_state.nodo = flow[nodo]["si"]
                 st.rerun()
-
         with col2:
             if st.button("No"):
                 st.session_state.historial.append(nodo)
                 st.session_state.nodo = flow[nodo]["no"]
                 st.rerun()
 
-        # Botón volver
         if nodo != "inicio":
             if st.button("Regresar"):
                 volver()
 
-        # -------------------------
-        # DATO CURIOSO (IZQUIERDA)
-        # -------------------------
+    # -------- COLUMNA DERECHA (CURIOSO + IA) --------
+    with col_side:
+
         st.markdown(
             """
-            <div style="display:flex; align-items:center; gap:8px; margin-top:30px;">
-            <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="40">
+            <div style="display:flex; align-items:center; gap:8px;">
+            <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="45" height="45">
             <span style="font-size:1.25rem; font-weight:bold;">Dato curioso</span>
             </div>
             """,
-            unsafe_allow_html=True
+            unsafe_allow_html=True,
         )
-        st.info(flow[nodo].get("curioso", "Aquí puedes agregar un dato curioso."))
 
-    # -------------------------
-    # IA (DERECHA)
-    # -------------------------
-    with col_side:
+        st.info(flow[nodo]["info"])
+
+        st.markdown("---")
         st.markdown("### 🤖 Asistente Inteligente")
 
+        notebook_url = "https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3"
+
         st.markdown(
-            """
-            <div style="padding:15px; border-radius:10px; background-color:#f7f7f7;
-                    border:1px solid #ddd; text-align:center;">
-            <p style="font-size:1.1rem; font-weight:600; margin-bottom:10px;">
-                Accede al asistente con la información completa
-            </p>
-            <a href="https://notebooklm.google.com/notebook/68134421-ea9c-45fc-97e2-648a101095d3" 
-               target="_blank" 
-               style="display:inline-block; padding:10px 18px; background-color:#4a90e2; color:white;
-                      border-radius:8px; text-decoration:none; font-weight:bold;">
-               Abrir Asistente NotebookLM
+            f"""
+            <a href="{notebook_url}" target="_blank">
+                <button style="
+                    padding:10px 20px;
+                    background-color:#4CAF50;
+                    color:white;
+                    border:none;
+                    border-radius:8px;
+                    font-size:16px;
+                    cursor:pointer;">
+                    Abrir NotebookLM
+                </button>
             </a>
-            </div>
             """,
             unsafe_allow_html=True
         )
