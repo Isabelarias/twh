@@ -7,10 +7,9 @@ st.set_page_config(page_title="Life Cycle", layout="wide")
 # ---------------------------------------------------
 st.markdown(
     """
-    <div style="display:flex; align-items:center; gap:15px;">
+    <div style="display:flex; justify-content:flex-end; align-items:center; width:100%; margin-bottom:-40px; margin-top:-20px;">
         <img src="https://media.licdn.com/dms/image/sync/v2/D5627AQHFh-gz6oTSAQ/articleshare-shrink_480/B56ZmBlrxmJ4Ao-/0/1758815763863?e=2147483647&v=beta&t=GMDQ2mYSHgk7SWwFTFlkSBF4FhZRD3Bil1rFrB5W9bo" 
-             width="90" style="border-radius:10px;">
-        <h1 style="margin:0;">Life Cycle</h1>
+             style="width:180px; height:auto;">
     </div>
     """,
     unsafe_allow_html=True
