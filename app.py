@@ -9,19 +9,19 @@ flow = {
         "pregunta": "¿La prescripción necesita autorización?",
         "si": "autorizacion_si",
         "no": "autorizacion_no",
-        "info": "Una prescripción necesita autorización cuando supera ciertos costos o es considerada especial por la aseguradora."
+        "info": "kfjgdfigkjgdfjg"
     },
     "autorizacion_si": {
         "pregunta": "¿El paciente cumple criterios?",
         "si": "FIN1",
         "no": "FIN2",
-        "info": "Los criterios clínicos se basan en guías médicas y políticas de la aseguradora."
+        "info": "kdjglgjkdfgkfdhjgf"
     },
     "autorizacion_no": {
         "pregunta": "¿Es una prescripción válida?",
         "si": "FIN3",
         "no": "FIN4",
-        "info": "Aquí revisamos si el médico diligenció la prescripción correctamente."
+        "info": "dfjkgdfkgdfgndfkgkdjg"
     }
 }
 
@@ -36,7 +36,7 @@ finales = {
         "titulo": "Autorización denegada",
         "texto": "El paciente no cumple los criterios clínicos.",
         "color": "error",
-        "extra": "Dato útil: Puedes sugerir al solicitante que presente nueva evidencia clínica."
+        "extra": "kdsjgfkdgkj"
     },
     "FIN3": {
         "titulo": "No requiere autorización",
