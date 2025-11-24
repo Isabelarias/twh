@@ -6,7 +6,7 @@ st.set_page_config(page_title="Life Cycle", layout="wide")
 st.markdown(
     """
     <div style="display:flex; justify-content:flex-end; align-items:center; width:100%; margin-bottom:-40px; margin-top:-20px;">
-        <img src="https://media.licdn.com/dms/image/sync/v2/D5627AQHFh-gz6oTSAQ/articleshare-shrink_480/B56ZmBlrxmJ4Ao-/0/1758815763863?e=2147483647&v=beta&t=GMDQ2mYSHgk7SWwFTFlkSBF4FhZRD3Bil1rFrB5W9bo" 
+        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.prnewswire.com%2Fnews-releases%2Fmedpoint-management-makes-strategic-investment-in-third-way-health-302566767.html&psig=AOvVaw1dOC5rfW1kZ9euAL6goy2u&ust=1764113842733000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCOic-qj6i5EDFQAAAAAdAAAAABBO" 
              style="width:180px; height:auto;">
     </div>
     """,
