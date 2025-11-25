@@ -15,7 +15,7 @@ st.markdown(
 
 # Botones ------------------------------------------------------
 
-st.markdown("### Selecciona un diagrama de decisiones:")
+st.markdown(" ")
 
 colA, colB, colC, colD, colE, colF, colG, colH = st.columns(8)
 
