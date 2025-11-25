@@ -14,7 +14,15 @@ st.markdown(
 )
 
 # Botones ------------------------------------------------------
+if "diagrama" not in st.session_state:
+    st.session_state.diagrama = None
 
+if "nodo" not in st.session_state:
+    st.session_state.nodo = None
+
+if "historial" not in st.session_state:
+    st.session_state.historial = []
+    
 st.markdown(" ")
 
 colA, colB, colC, colD, colE, colF, colG, colH = st.columns(8)
