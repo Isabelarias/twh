@@ -413,7 +413,7 @@ else:
         st.markdown(
             """
             <div style="display:flex; align-items:center; gap:10px;">
-                <img src="https://cdn-icons-png.flaticon.com/128/12282/12282514.png">
+                <img src="https://cdn-icons-png.flaticon.com/128/12282/12282514.png" width="35">
                 <span style="font-size:20px; font-weight:bold;">Dato curioso</span>
             </div>
             """,
