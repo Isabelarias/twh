@@ -339,7 +339,7 @@ if nodo in finales:
         st.markdown(
             """
             <div style="display:flex; align-items:center; gap:10px;">
-                <img src="https://img.icons8.com/?size=100&id=112286&format=png&color=000000" width="35">
+                <img src="https://cdn-icons-png.flaticon.com/128/9953/9953680.png" width="35">
                 <span style="font-size:20px; font-weight:bold;">Información adicional</span>
             </div>
             """,
@@ -355,7 +355,7 @@ if nodo in finales:
         st.markdown(
             """
             <div style="display:flex; align-items:center; gap:10px;">
-                <img src="https://img.icons8.com/?size=100&id=56740&format=png&color=000000" width="35">
+                <img src="https://cdn-icons-png.flaticon.com/128/15917/15917116.png" width="35">
                 <span style="font-size:20px; font-weight:bold;">Asistente Inteligente</span>
             </div>
             """,
@@ -413,7 +413,7 @@ else:
         st.markdown(
             """
             <div style="display:flex; align-items:center; gap:10px;">
-                <img src="https://cdn-icons-png.flaticon.com/128/9953/9953680.png" width="40">
+                <img src="https://cdn-icons-png.flaticon.com/128/9953/9953680.png" width="35">
                 <span style="font-size:20px; font-weight:bold;">Dato curioso</span>
             </div>
             """,
@@ -430,7 +430,7 @@ else:
         st.markdown(
             """
             <div style="display:flex; align-items:center; gap:10px;">
-                <img src="https://cdn-icons-png.flaticon.com/128/15917/15917116.png" width="40">
+                <img src="https://cdn-icons-png.flaticon.com/128/15917/15917116.png" width="35">
                 <span style="font-size:20px; font-weight:bold;">Asistente Inteligente</span>
             </div>
             """,
