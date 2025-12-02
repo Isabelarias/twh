@@ -95,7 +95,7 @@ if st.session_state.diagrama is None:
 if st.session_state.diagrama == "A":
     flow = {
         "inicio": {
-            "pregunta": "¿La prescripción necesita autorización?",
+            "pregunta": "Did the provider send new insurance information for a patient that has not yet been entered in the system?",
             "si": "autorizacion_si",
             "no": "autorizacion_no",
             "info": "En algunos sistemas médicos, más del 40% de las prescripciones pasan por un proceso de autorización previa."
