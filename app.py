@@ -87,7 +87,7 @@ with colH:
         st.rerun()
 
 if st.session_state.diagrama is None:
-    st.markdown("<br><h3 style='text-align:center; opacity:0.6;'>Selecciona un módulo para iniciar</h3>", unsafe_allow_html=True)
+    st.markdown("<br><h3 style='text-align:center; opacity:0.6;'>Select a module to start</h3>", unsafe_allow_html=True)
     st.stop()
 
 # Diagramas de decision ------------------------------------------------------
