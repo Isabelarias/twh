@@ -340,7 +340,7 @@ if nodo in finales:
             """
             <div style="display:flex; align-items:center; gap:10px;">
                 <img src="https://cdn-icons-png.flaticon.com/128/9953/9953680.png" width="35">
-                <span style="font-size:20px; font-weight:bold;">Información adicional</span>
+                <span style="font-size:20px; font-weight:bold;">Did you know?</span>
             </div>
             """,
             unsafe_allow_html=True
@@ -356,7 +356,7 @@ if nodo in finales:
             """
             <div style="display:flex; align-items:center; gap:10px;">
                 <img src="https://cdn-icons-png.flaticon.com/128/15917/15917116.png" width="35">
-                <span style="font-size:20px; font-weight:bold;">Asistente Inteligente</span>
+                <span style="font-size:20px; font-weight:bold;">AI Assistant</span>
             </div>
             """,
             unsafe_allow_html=True
@@ -414,7 +414,7 @@ else:
             """
             <div style="display:flex; align-items:center; gap:10px;">
                 <img src="https://cdn-icons-png.flaticon.com/128/9953/9953680.png" width="35">
-                <span style="font-size:20px; font-weight:bold;">Dato curioso</span>
+                <span style="font-size:20px; font-weight:bold;">Did you know?</span>
             </div>
             """,
             unsafe_allow_html=True
@@ -431,7 +431,7 @@ else:
             """
             <div style="display:flex; align-items:center; gap:10px;">
                 <img src="https://cdn-icons-png.flaticon.com/128/15917/15917116.png" width="35">
-                <span style="font-size:20px; font-weight:bold;">Asistente Inteligente</span>
+                <span style="font-size:20px; font-weight:bold;">AI Assistant</span>
             </div>
             """,
             unsafe_allow_html=True
